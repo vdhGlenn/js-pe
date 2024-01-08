@@ -175,37 +175,39 @@ https://github.com/vdhGlenn/js-pe
 			checkEmptyField(land, 'Land is verplicht')
 			checkEmptyField(provincie, 'Provincie is verplicht')
 			//E-mail check - Google voor de Syntax
-			const emailadres = document.querySelector("#email").value;
+			const emailadres = document.querySelector("#email").value
 			validateEmail(emailadres)
 			//Wachtwoorden check - Eigen recept
 			const wachtwoord = document.querySelector('#wachtwoord').value
 			const wachtwoord2 = document.querySelector('#wachtwoord2').value
 			const gebruiker = document.querySelector('#gebruikersnaam').value
 			if(wachtwoord === ""){
-			    errorsArray.push("Wachtwoord is niet ingevuld");
+			    errorsArray.push("Wachtwoord is niet ingevuld")
 			   }
 			if(wachtwoord2 === ""){
-			    errorsArray.push("Herhaal Wachtwoord is niet ingevuld");
+			    errorsArray.push("Herhaal Wachtwoord is niet ingevuld")
 			   }
 			if(wachtwoord.length <= 7){
-			    errorsArray.push("Wachtwoord moet minstens 7 tekens bevatten");
+			    errorsArray.push("Wachtwoord moet minstens 7 tekens bevatten")
 			   }
 			if(wachtwoord !== wachtwoord2){
-			    errorsArray.push("Wachtwoorden komen niet overeen");
+			    errorsArray.push("Wachtwoorden komen niet overeen")
 			   }
 			//moet minstens 1 karakter bevatten, minder = 0 oftwel leeg 			
 			if(gebruiker === ""){
-				errorsArray.push("Gebruikersnaam moet minstens 1 karakter bevatten");
+				errorsArray.push("Gebruikersnaam moet minstens 1 karakter bevatten")
 			}
 			if(!/^[a-zA-Z0-9_][a-zA-Z0-9_.-]*$/.test(gebruiker)) {
-				errorsArray.push("Gebruiker mag niet beginnen met een punt of koppelteken");
+				errorsArray.push("Gebruiker mag niet beginnen met een punt of koppelteken")
 			}
 			const postcode = document.querySelector('#postcode').value
 			checkPc(postcode)
 			const voorwaarden = document.querySelector('#algemenevoorwaarden').checked
 			if(!voorwaarden){
-				errorsArray.push("U moet de algemene voorwaarden accepteren");
+				errorsArray.push("U moet de algemene voorwaarden accepteren")
 			}
+			let gekozenBetaling = document.querySelector('input[name="betalingswijze"]:checked')
+        		validatePayment(gekozenBetaling);	
 			//fouten weergeven - geleerd in de les?
             if (errorsArray.length > 0) {
                 let errorList = document.querySelector('#errors ul')
@@ -216,9 +218,7 @@ https://github.com/vdhGlenn/js-pe
                 document.querySelector('#errors').classList.remove('d-none')
             } else {
                 document.querySelector('#success').classList.remove('d-none')
-                document.querySelector('#info').classList.remove('d-none')
-				let gekozenBetaling = document.querySelector('input[name="betalingswijze"]:checked');
-        		validatePayment(gekozenBetaling);				
+                document.querySelector('#info').classList.remove('d-none')		
             }
         }
         function checkEmptyField(field, message) {
@@ -227,9 +227,9 @@ https://github.com/vdhGlenn/js-pe
             }
         }
 	function validateEmail(email) {    
-    const regex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+    const regex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/
     if (!regex.test(email)) {
-         errorsArray.push("Ongeldig e-mail adres");
+         errorsArray.push("Ongeldig e-mail adres")
             }
 }
         function hideAlerts() {
@@ -238,9 +238,12 @@ https://github.com/vdhGlenn/js-pe
             document.querySelector('#info').classList.add('d-none')
         }
 		function validatePayment(betaalwijzeElement) {
-    let betaalwijze = betaalwijzeElement ? betaalwijzeElement.value : 'Geen betalingswijze geselecteerd'
+    let betaalwijze = betaalwijzeElement ? betaalwijzeElement.value : ""
+	if(betaalwijze == ""){
+		errorsArray.push("Geen betalingswijze geselecteerd")
+	}else{
     let infoList = document.querySelector('#info p')
-    infoList.textContent = `Je betalingswijze is ${betaalwijze}`
+    infoList.textContent = `Je betalingswijze is ${betaalwijze}`}
 }
 function checkPc(veld) {
 	if(veld == ""){
@@ -248,10 +251,10 @@ function checkPc(veld) {
 	}
 	if (/^\d+$/.test(veld)) {
     if(veld < 1000 || veld > 9999){
-		errorsArray.push("De waarde van postcode moet tussen 1000 en 9999 liggen");
+		errorsArray.push("De waarde van postcode moet tussen 1000 en 9999 liggen")
 	}	
 	}else{
-			errorsArray.push("Postcode kan enkel cijfers bevatten");
+			errorsArray.push("Postcode kan enkel cijfers bevatten")
 		}		
 }
         checkForm.addEventListener('click', checkFormulier)				 
