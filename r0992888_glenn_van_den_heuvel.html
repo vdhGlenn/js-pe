@@ -1,5 +1,10 @@
 <!doctype html>
 <html>
+	<!--Online:
+http://glenn-tm.be/javascript/r0992888_glenn_van_den_heuvel.html
+Github: 
+https://github.com/vdhGlenn/js-pe
+ -->
 <head>
 <meta charset="utf-8"> 
   <title>JS-PE Van den Heuvel Glenn</title>
@@ -170,11 +175,12 @@
 			checkEmptyField(land, 'Land is verplicht')
 			checkEmptyField(provincie, 'Provincie is verplicht')
 			//E-mail check - Google voor de Syntax
-			validateEmail('#email')
+			const emailadres = document.querySelector("#email").value;
+			validateEmail(emailadres)
 			//Wachtwoorden check - Eigen recept
-			let wachtwoord = document.querySelector('#wachtwoord').value
-			let wachtwoord2 = document.querySelector('#wachtwoord2').value
-			let gebruiker = document.querySelector('#gebruikersnaam').value
+			const wachtwoord = document.querySelector('#wachtwoord').value
+			const wachtwoord2 = document.querySelector('#wachtwoord2').value
+			const gebruiker = document.querySelector('#gebruikersnaam').value
 			if(wachtwoord === ""){
 			    errorsArray.push("Wachtwoord is niet ingevuld");
 			   }
@@ -194,9 +200,9 @@
 			if(!/^[a-zA-Z0-9_][a-zA-Z0-9_.-]*$/.test(gebruiker)) {
 				errorsArray.push("Gebruiker mag niet beginnen met een punt of koppelteken");
 			}
-			let postcode = document.querySelector('#postcode').value
+			const postcode = document.querySelector('#postcode').value
 			checkPc(postcode)
-			let voorwaarden = document.querySelector('#algemenevoorwaarden').checked
+			const voorwaarden = document.querySelector('#algemenevoorwaarden').checked
 			if(!voorwaarden){
 				errorsArray.push("U moet de algemene voorwaarden accepteren");
 			}
@@ -220,8 +226,7 @@
                 errorsArray.push(message)
             }
         }
-	function validateEmail() {
-    const email = document.querySelector("#email").value;
+	function validateEmail(email) {    
     const regex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
     if (!regex.test(email)) {
          errorsArray.push("Ongeldig e-mail adres");
